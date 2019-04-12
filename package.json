@@ -20,7 +20,7 @@
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/PhobraryAgent.app",
         "build": "set -o pipefail && xcodebuild -project ios/PhobraryAgent.xcodeproj -UseNewBuildSystem=NO -scheme PhobraryAgent -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build | xcpretty",
         "type": "ios.simulator",
-        "name": "iPhone 7 Plus"
+        "name": "iPhone 7"
       }
     }
   },
