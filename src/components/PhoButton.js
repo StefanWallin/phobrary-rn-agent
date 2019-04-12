@@ -22,6 +22,7 @@ export default class PhoButton extends React.PureComponent {
   render() {
     return (
       <TouchableHighlight
+        testID={this.props.testID}
         underlayColor='transparent'
         disabled={this.props.loading || this.props.disabled}
         onPress={() => {

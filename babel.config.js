@@ -14,6 +14,7 @@ module.exports = function (api) {
           '~config': './src/config/',
           '~images': './src/images/',
           '~reducers': './src/reducers/',
+          '~screens': './src/screens/',
         },
         extensions: ['.js', '.ios.js', '.android.js'],
       },
