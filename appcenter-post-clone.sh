@@ -8,7 +8,7 @@ curl https://raw.githubusercontent.com/wix/homebrew-brew/master/AppleSimulatorUt
 tar xzvf applesimutils.tar.gz
 sh buildForBrew.sh .
 cd ..
-export PATH=$PATH:./simutils/build/Build/Products/Release
+export PATH=$PATH:./simutils/build/Build/Products/Debug
 
 echo "Installing correct node version..."
 export HOMEBREW_NO_AUTO_UPDATE=1
@@ -20,7 +20,7 @@ echo "Installing dependencies for detox tests..."
 npm install
 
 echo "Building the project for Detox tests..."
-npx detox build --configuration ios.sim.release
+npx detox build --configuration ios.sim.debug
 
 echo "Executing Detox tests..."
-npx detox test --configuration ios.sim.release --cleanup
+npx detox test --configuration ios.sim.debug --cleanup
