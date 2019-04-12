@@ -8,7 +8,7 @@ curl https://raw.githubusercontent.com/wix/homebrew-brew/master/AppleSimulatorUt
 tar xzvf applesimutils.tar.gz
 sh buildForBrew.sh .
 cd ..
-export PATH=$PATH:./simutils/build/Build/Products/Debug
+export PATH=$PATH:./simutils/build/Build/Products/Release
 
 echo "Installing correct node version..."
 export HOMEBREW_NO_AUTO_UPDATE=1
