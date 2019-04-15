@@ -3,8 +3,11 @@ package com.phobraryagent;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.mehcode.reactnative.splashscreen.SplashScreenPackage;
+import com.balthazargronon.RCTZeroconf.ZeroconfReactPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+import org.reactnative.camera.RNCameraPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -25,6 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenPackage(),
+            new ZeroconfReactPackage(),
+            new RNCameraPackage(),
             new RNGestureHandlerPackage(),
             new LinearGradientPackage()
       );

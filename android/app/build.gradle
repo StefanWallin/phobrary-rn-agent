@@ -137,7 +137,10 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-gesture-handler')
+    implementation project(':react-native-zeroconf')
+    implementation project(':rn-splash-screen')
+    implementation project(':react-native-camera')
+    implementation project(':react-native-gesture-handler')
     implementation project(':react-native-linear-gradient')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
