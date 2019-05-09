@@ -42,7 +42,7 @@
     "rn-splash-screen": "^5.2.0"
   },
   "devDependencies": {
-    "babel-jest": "24.7.1",
+    "babel-jest": "24.8.0",
     "detox": "^12.6.1",
     "jest": "^24.7.1",
     "metro-react-native-babel-preset": "0.54.0",
