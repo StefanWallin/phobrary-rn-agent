@@ -29,7 +29,7 @@
     "deep-equal": "^1.0.1",
     "react": "16.6.1",
     "react-native": "0.57.7",
-    "react-native-camera": "^2.6.0",
+    "react-native-camera": "^2.8.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-linear-gradient": "^2.5.4",
     "react-navigation": "^3.9.1",
