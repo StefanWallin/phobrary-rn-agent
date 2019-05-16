@@ -26,7 +26,6 @@
     }
   },
   "dependencies": {
-    "babel-plugin-module-resolver": "^3.2.0",
     "deep-equal": "^1.0.1",
     "react": "16.8.6",
     "react-native": "0.59.7",
@@ -43,10 +42,13 @@
     "rn-splash-screen": "^5.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
     "babel-jest": "24.8.0",
-    "detox": "^12.8.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.8.6",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "detox": "^12.8.0"
   }
 }
