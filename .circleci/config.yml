@@ -1,0 +1,150 @@
+version: 2
+jobs:
+  node:
+    working_directory: ~/phobrary-agent
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - node_modules-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+            - node_modules-v1
+
+      - run: npm ci
+
+      - save_cache:
+          key: node_modules-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+          paths:
+            - node_modules
+
+      - run:
+          name: npm test
+          command: |
+            mkdir -p test-results/jest
+            npm test
+          environment:
+            JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
+
+      - persist_to_workspace:
+          root: ~/phobrary-agent
+          paths:
+            - node_modules
+
+      - store_test_results:
+          path: test-results
+
+      - store_artifacts:
+          path: test-results
+
+  android:
+    working_directory: ~/phobrary-agent/android
+    docker:
+      - image: circleci/android:api-28-node
+    steps:
+      - checkout:
+          path: ~/phobrary-agent
+
+      - attach_workspace:
+          at: ~/phobrary-agent
+
+      - restore_cache:
+          keys:
+            - bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+            - bundle-v1-
+
+      - run: bundle install --clean
+
+      - save_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+          paths:
+            - vendor/bundle
+      #
+      # - run:
+      #     name: fastlane tests
+      #     command: |
+      #       mkdir -p test-results/fastlane
+      #       bundle exec fastlane test
+      #       mv fastlane/report.xml test-results/fastlane
+      #
+      # - store_test_results:
+      #     path: test-results
+      #
+      # - store_artifacts:
+      #     path: test-results
+
+  ios:
+    macos:
+      xcode: "9.0"
+    working_directory: ~/phobrary-agent
+
+    # use a --login shell so our "set Ruby version" command gets picked up for later steps
+    shell: /bin/bash --login -o pipefail
+
+    steps:
+      - checkout
+
+      - run:
+          name: set Ruby version
+          command:  echo "ruby-2.4" > ~/.ruby-version
+
+      - restore_cache:
+          keys:
+            - node_modules-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+            - node_modules-v1-
+
+      # not using a workspace here as Node and Yarn versions
+      # differ between our macOS executor image and the Docker containers above
+      - run: npm ci
+
+      - save_cache:
+          key: node_modules-v1-{{ checksum "package-lock.json" }}-{{ arch }}
+          paths:
+            - node_modules
+
+      - restore_cache:
+          keys:
+            - bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
+            - bundle-v1
+
+
+      - run:
+          command: bundle install --clean
+          working_directory: ios
+
+      - save_cache:
+          key: bundle-v1-{{ checksum "ios/Gemfile.lock" }}-{{ arch }}
+          paths:
+            - vendor/bundle
+
+      # - run:
+      #     command: bundle exec fastlane test
+      #     working_directory: ios
+      #
+      # - run:
+      #     name: set up test results
+      #     working_directory: ios
+      #     when: always
+      #     command: |
+      #       mkdir -p test-results/fastlane test-results/xcode
+      #       mv fastlane/report.xml test-results/fastlane
+      #       mv fastlane/test_output/report.junit test-results/xcode/junit.xml
+      #
+      # - store_test_results:
+      #     path: ios/test-results
+      #
+      # - store_artifacts:
+      #     path: ios/test-results
+
+workflows:
+  version: 2
+  node-android-ios:
+    jobs:
+      - node
+      - android:
+          requires:
+            - node
+      - ios:
+          requires:
+            - node
