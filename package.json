@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ci-test": "npm run test:e2e:build && npm run test",
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "./node_modules/.bin/jest --passWithNoTests /src/.*/__tests__/*",
     "test:e2e": "detox test -c ios.sim.debug",
