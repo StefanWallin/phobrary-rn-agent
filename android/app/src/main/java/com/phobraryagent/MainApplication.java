@@ -3,6 +3,7 @@ package com.phobraryagent;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.mehcode.reactnative.splashscreen.SplashScreenPackage;
 import com.balthazargronon.RCTZeroconf.ZeroconfReactPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNDeviceInfo(),
             new SplashScreenPackage(),
             new ZeroconfReactPackage(),
             new RNCameraPackage(),
