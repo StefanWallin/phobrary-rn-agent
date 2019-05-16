@@ -89,7 +89,7 @@ jobs:
 
       - run:
           name: set Ruby version
-          command:  echo "ruby-2.5.5" > ~/.ruby-version
+          command: echo "ruby-2.5.5" > ~/phobrary-agent/.ruby-version
 
       - restore_cache:
           keys:
@@ -107,18 +107,21 @@ jobs:
 
       - restore_cache:
           keys:
-            - bundle-v1-{{ arch }}-{{ checksum "ios/Gemfile.lock" }}
+            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.lock" }}
             - bundle-v1-{{ arch }}
 
 
       - run:
           command: bundle install
-          working_directory: ios
+
 
       - save_cache:
-          key: bundle-v1-{{ arch }}-{{ checksum "ios/Gemfile.lock" }}
+          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+
+      - run:
+          command: npm run ci-test
 
       # - run:
       #     command: bundle exec fastlane test
