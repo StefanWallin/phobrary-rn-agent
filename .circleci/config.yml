@@ -123,6 +123,10 @@ jobs:
             - vendor/bundle
 
       - run:
+          name: Install applesimutils
+          command: brew tap wix/brew && brew install applesimutils --HEAD
+
+      - run:
           command: npm run ci-test
 
       # - run:
