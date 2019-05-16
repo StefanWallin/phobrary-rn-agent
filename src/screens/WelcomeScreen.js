@@ -6,10 +6,12 @@ import {
   Text,
 } from 'react-native';
 import colors from '~config/colors';
+import store from '~src/store';
 
 export default class WelcomeScreen extends React.PureComponent {
   onGetStarted = () => {
     console.log("Let's get started!");
+    store.dispatch({ type: 'DISCOVER_SERVERS' })
   }
 
   onSignIn = () => {

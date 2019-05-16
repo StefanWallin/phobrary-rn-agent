@@ -30,16 +30,19 @@
     "react": "16.8.6",
     "react-native": "0.59.7",
     "react-native-camera": "^2.9.0",
+    "react-native-device-info": "^1.5.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-native-linear-gradient": "^2.5.4",
-    "react-navigation": "^3.9.2",
+    "react-navigation": "^3.8.1",
     "react-native-qrcode-scanner": "^1.2.1",
     "react-native-zeroconf": "^0.10.0",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2",
     "redux-thunk": "^2.3.0",
-    "rn-splash-screen": "^5.2.0"
+    "rn-splash-screen": "^5.2.0",
+    "urijs": "^1.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

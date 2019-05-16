@@ -56,5 +56,5 @@ class App extends React.PureComponent {
 }
 
 export default connect(state => ({
-  networkActivity: state.network.activity
+  networkActivity: !!state.network.activitySources.length
 }))(App);
