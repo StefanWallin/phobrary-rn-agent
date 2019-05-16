@@ -89,7 +89,7 @@ jobs:
 
       - run:
           name: set Ruby version
-          command:  echo "ruby-2.6.3" > ~/.ruby-version
+          command:  echo "ruby-2.5.5" > ~/.ruby-version
 
       - restore_cache:
           keys:
