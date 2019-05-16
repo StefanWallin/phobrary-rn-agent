@@ -51,13 +51,15 @@ jobs:
 
       - restore_cache:
           keys:
-            - bundle-v1-{{ arch }}-{{ checksum "Gemfile.lock" }}
+            - bundle-v1-{{ arch }}-{{ checksum "../Gemfile.lock" }}
             - bundle-v1-{{ arch }}-
 
-      - run: bundle install
+      - run:
+          command: bundle install
+          working_directory: ~/phobrary-agent/
 
       - save_cache:
-          key: bundle-v1-{{ arch }}-{{ checksum "Gemfile.lock" }}
+          key: bundle-v1-{{ arch }}-{{ checksum "../Gemfile.lock" }}
           paths:
             - vendor/bundle
       #
