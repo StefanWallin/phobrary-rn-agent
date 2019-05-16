@@ -54,7 +54,7 @@ jobs:
             - bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
             - bundle-v1-
 
-      - run: bundle install --clean
+      - run: bundle install
 
       - save_cache:
           key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
@@ -110,7 +110,7 @@ jobs:
 
 
       - run:
-          command: bundle install --clean
+          command: bundle install
           working_directory: ios
 
       - save_cache:
