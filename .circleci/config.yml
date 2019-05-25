@@ -78,7 +78,7 @@ jobs:
 
   ios:
     macos:
-      xcode: "10.2.0"
+      xcode: "10.2.1"
     environment:
       FL_OUTPUT_DIR: output
     working_directory: ~/phobrary-agent
