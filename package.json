@@ -42,7 +42,7 @@
     "rn-splash-screen": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.4.5",
     "babel-jest": "24.8.0",
     "jest": "^24.8.0",
