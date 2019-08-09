@@ -49,6 +49,6 @@
     "metro-react-native-babel-preset": "0.54.1",
     "react-test-renderer": "16.9.0",
     "babel-plugin-module-resolver": "^3.2.0",
-    "detox": "^13.3.3"
+    "detox": "^14.0.1"
   }
 }
