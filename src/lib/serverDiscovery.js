@@ -8,31 +8,30 @@ export default class ServerDiscovery {
   static myInstance = null
 
   static getInstance() {
-    if (ServerDiscovery.myInstance == null) {
-      const zeroconf = new Zeroconf();
-      ServerDiscovery.myInstance = new ServerDiscovery(zeroconf);
-    }
-    return ServerDiscovery.myInstance;
+
   }
 
   static scan() {
-    const sd = ServerDiscovery.getInstance();
+    const sd = new ServerDiscovery();
     sd.startScan();
   }
 
   static stop() {
-    const sd = ServerDiscovery.getInstance();
+    const sd = new ServerDiscovery();
     sd.stopScan();
   }
 
-  constructor(zeroconf) {
-    this.zeroconf = zeroconf;
+  constructor() {
+    if (ServerDiscovery.myInstance === null) {
+      ServerDiscovery.myInstance = new Zeroconf();
+    }
+    return ServerDiscovery.myInstance;
   }
 
   startScan() {
     try {
-      this.zeroconf.scan(type = 'phobrary', protocol = 'tcp', domain = 'local.')
-      this.zeroconf.on('resolved', (result) => {
+      ServerDiscovery.myInstance.scan('phobrary')
+      ServerDiscovery.myInstance.on('resolved', (result) => {
         store.dispatch(foundServer(result));
       });
     } catch(error) {
@@ -42,12 +41,12 @@ export default class ServerDiscovery {
 
   stopScan() {
     try {
-      this.zeroconf.stop();
+      ServerDiscovery.myInstance.stop();
     } catch(error) {
       console.warn(error);
     }
     try {
-      this.zeroconf.removeDeviceListeners();
+      ServerDiscovery.myInstance.removeDeviceListeners();
     } catch(error) {
       console.warn(error);
     }

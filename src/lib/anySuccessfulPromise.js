@@ -3,28 +3,47 @@ export default class AnySuccessfulPromise {
     this.promises = promises;
     this.successes = [];
     this.errors = [];
-    this.thenCallback = () => { console.error('then not defined'); };
-    this.catchCallback = () => { console.error('catch not defined'); };
-    this.finallyCallback = () => {};
+    this.thenCallbacks = [];
+    this.catchCallback = () => {
+      console.error("catch not defined");
+    };
+    this.finallyCallbacks = [];
     this.raceActive = true;
     this.awaitPromises();
   }
 
-  then(callback) { this.thenCallback = callback; return this; }
+  then(callback) {
+    this.thenCallbacks.push(callback);
+    return this;
+  }
 
-  catch(callback) { this.catchCallback = callback; return this; }
+  catch(callback) {
+    this.catchCallback = callback;
+    return this;
+  }
 
-  finally(callback) { this.finallyCallback = callback; return this; }
+  finally(callback) {
+    this.finallyCallbacks.push(callback);
+    return this;
+  }
 
   awaitPromises() {
-    this.promises.forEach((promise) => {
+    this.promises.forEach(promise => {
       promise
         .then(result => {
-          if(this.raceActive) this.thenCallback(result);
-          this.raceActive = false;
+          if (this.thenCallbacks.length == 0) {
+            console.error("then not defined");
+            return;
+          }
+          if (this.raceActive) {
+            this.thenCallbacks.forEach(thenCallback => thenCallback(result));
+          }
           this.successes.push(result);
+          this.raceActive = false;
         })
-        .catch(result => this.errors.push(result))
+        .catch(result => {
+          this.errors.push(result);
+        })
         .finally(() => {
           const finishedLength = this.successes.length + this.errors.length;
           if (finishedLength === this.promises.length) {
@@ -35,7 +54,9 @@ export default class AnySuccessfulPromise {
   }
 
   executeCallbacks() {
-    this.catchCallback(this.errors);
-    this.finallyCallback(this.successes, this.errors);
+    if (this.successes.length === 0) this.catchCallback(this.errors);
+    this.finallyCallbacks.forEach(finallyCallback =>
+      finallyCallback(this.successes, this.errors)
+    );
   }
 }
