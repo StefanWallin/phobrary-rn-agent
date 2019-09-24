@@ -28,7 +28,7 @@
   "dependencies": {
     "deep-equal": "^1.1.0",
     "react": "16.8.6",
-    "react-native": "0.59.7",
+    "react-native": "0.60.5",
     "react-native-camera": "^3.3.3",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-linear-gradient": "^2.5.6",
